@@ -70,7 +70,7 @@ final class ParseManager {
             regionMetadata = countryMetadata
         }
         // National Prefix Strip (7)
-        parser.stripNationalPrefix(&nationalNumber, metadata: regionMetadata)
+        let isNationalPrefixStripped = parser.stripNationalPrefix(&nationalNumber, metadata: regionMetadata)
 		
         // Test number against general number description for correct metadata (8)
         if let generalNumberDesc = regionMetadata.generalDesc, (regexManager.hasValue(generalNumberDesc.nationalNumberPattern) == false || parser.isNumberMatchingDesc(nationalNumber, numberDesc: generalNumberDesc) == false) {
@@ -94,7 +94,13 @@ final class ParseManager {
             }
         }
 
-        let phoneNumber = PhoneNumber(numberString: numberString, countryCode: countryCode, leadingZero: leadingZero, nationalNumber: finalNationalNumber, numberExtension: numberExtension, type: type)
+        let phoneNumber = PhoneNumber(numberString: numberString,
+                                      countryCode: countryCode,
+                                      leadingZero: leadingZero,
+                                      nationalNumber: finalNationalNumber,
+                                      numberExtension: numberExtension,
+                                      type: type,
+                                      isNationalPrefixStripped: isNationalPrefixStripped)
         return phoneNumber
     }
     

@@ -271,9 +271,9 @@ final class PhoneNumberParser {
      - Parameter metadata:  Final country's metadata.
      - Returns: Modified number without national prefix.
      */
-    func stripNationalPrefix(_ number: inout String, metadata: MetadataTerritory) {
+    @discardableResult func stripNationalPrefix(_ number: inout String, metadata: MetadataTerritory) -> Bool {
         guard let possibleNationalPrefix = metadata.nationalPrefixForParsing else {
-            return
+            return false
         }
         let prefixPattern = String(format: "^(?:%@)", possibleNationalPrefix)
         do {
@@ -294,15 +294,18 @@ final class PhoneNumberParser {
                     transformedNumber = String(number[index...])
                 }
                 if (regex.hasValue(nationalNumberRule) && regex.matchesEntirely(nationalNumberRule, string: number) && regex.matchesEntirely(nationalNumberRule, string: transformedNumber) == false){
-                    return
+                    return false
                 }
+                let didStripPrefix = number != transformedNumber
                 number = transformedNumber
-                return
+                return didStripPrefix
             }
         }
         catch {
-            return
+            return false
         }
+        
+        return false
     }
     
 }
