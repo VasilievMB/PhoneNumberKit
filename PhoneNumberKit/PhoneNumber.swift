@@ -66,6 +66,21 @@ extension PhoneNumber{
     }
 }
 
+extension PhoneNumber {
+    
+    public func byStrippingNumberExtension() -> PhoneNumber {
+        return PhoneNumber(numberString: numberString,
+                           countryCode: countryCode,
+                           leadingZero: leadingZero,
+                           nationalNumber: nationalNumber,
+                           numberExtension: nil,
+                           type: type,
+                           isNationalPrefixStripped: isNationalPrefixStripped,
+                           regionID: regionID)
+    }
+    
+}
+
 /// In past versions of PhoneNumebrKit you were able to initialize a PhoneNumber object to parse a String. Please use a PhoneNumberKit object's methods.
 public extension PhoneNumber {
     /**
