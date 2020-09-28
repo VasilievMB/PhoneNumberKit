@@ -3,7 +3,7 @@
 //  PhoneNumberKit
 //
 //  Created by Roy Marmelstein on 26/09/2015.
-//  Copyright © 2015 Roy Marmelstein. All rights reserved.
+//  Copyright © 2020 Roy Marmelstein. All rights reserved.
 //
 
 import Foundation
@@ -84,7 +84,8 @@ extension PhoneNumber {
     
 }
 
-/// In past versions of PhoneNumebrKit you were able to initialize a PhoneNumber object to parse a String. Please use a PhoneNumberKit object's methods.
+/// In past versions of PhoneNumberKit you were able to initialize a PhoneNumber object to parse a String. Please use a PhoneNumberKit object's methods.
+
 public extension PhoneNumber {
     /**
      DEPRECATED.
